@@ -27,7 +27,7 @@ Next.js 14 e-commerce platform for aromatic candles with Supabase backend, Strip
 
 ```bash
 # Clone the repository
-git clone https://github.com/gsempertegui/candle-shop.git
+git clone https://github.com/gsempertegui/candle-shop.git 
 cd candle-shop
 
 # Install dependencies
