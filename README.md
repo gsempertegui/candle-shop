@@ -1,0 +1,1 @@
+Initial file of a candle-shop web site application
