@@ -1,29 +1,3 @@
-**Yes, absolutely, George!** You can and **should** push a `README.md` file to your `candle-shop` repository. In fact, `README.md` is **essential** for GitHub projects, especially for freelancing portfolios. It's the first thing potential clients see when they visit `https://github.com/gsempertegui/candle-shop`, and GitHub automatically renders it as a beautifully formatted homepage for your repository.
-
-Since you already did the pull that likely brought in a basic `README.md` from GitHub's web interface, you can either enhance the existing one or create a new, comprehensive version to showcase your Next.js skills.
-
-### Why Push `README.md`?
-- **Project Showcase**: Explains what `candle-shop` does and your tech stack
-- **GitHub Rendering**: Auto-displays as repo homepage with Markdown formatting
-- **Freelancing**: Demonstrates communication skills and project documentation
-- **SEO**: Helps GitHub search and client discovery
-- **Professionalism**: Standard for open-source and portfolio projects
-
-### Step-by-Step: Create/Enhance README.md
-
-#### 1. Check Existing README.md
-```bash
-cd /c/Users/George/candle-shop
-ls -la README.md
-cat README.md
-```
-- **If exists**: GitHub's default version (basic template)
-- **If missing**: Create from scratch
-
-#### 2. Create Comprehensive README.md
-Replace or enhance with this professional template:
-```bash
-cat > README.md << 'EOF'
 # George's Candle Shop 🕯️
 
 Next.js 14 e-commerce platform for aromatic candles with Supabase backend, Stripe payments, and reusable React components.
