@@ -57,3 +57,57 @@ candle-shop/
 
 🌟 Key Components
 
+
+FormWrapper
+Reusable form container with styling and validation:
+
+<FormWrapper title="Add to Cart">
+  <input type="number" min="1" />
+  <button>Add to Cart</button>
+</FormWrapper>
+
+ProductCard
+Dynamic product display with cart integration:
+
+<ProductCard product={candle} />
+
+🔧 Environment Variables
+Create .env.local
+
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+
+
+📱 Live Demo
+Deployed on Vercel
+
+💼 Freelancing Skills Demonstrated
+
+Full-Stack Development: Next.js + Supabase + Stripe
+Modern React: App Router, Server Components, Context API
+Component Architecture: Reusable, maintainable UI patterns
+Database Integration: PostgreSQL with Supabase client
+Payment Processing: Secure Stripe checkout implementation
+Deployment: Vercel CI/CD with environment management
+TypeScript: Type-safe code for enterprise reliability
+
+🤝 Contributing
+
+Fork the repository
+Create a feature branch: git checkout -b feature/amazing-feature
+Commit changes: git commit -m 'Add amazing feature'
+Push to branch: git push origin feature/amazing-feature
+Open Pull Request
+
+📞 Contact
+George Sempertegui
+gsempertegui@gmail.com
+LinkedIn | GitHub
+Hire me for your next React/Next.js project! 🚀
+📄 License
+This project is open source and available under the MIT License.
+
+
+
