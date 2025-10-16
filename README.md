@@ -1,5 +1,5 @@
 # George's Candle Shop 🕯️
-
+ 
 Next.js 14 e-commerce platform for aromatic candles with Supabase backend, Stripe payments, and reusable React components.
 
 [![Vercel Deployment](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/gsempertegui/candle-shop)
