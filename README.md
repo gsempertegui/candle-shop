@@ -1,19 +1,20 @@
-# George's Candle Shop 🕯️
+# George's Candle Shop 🕯️- E-commerce Freelancer Portfolio
+
  
 Next.js 14 e-commerce platform for aromatic candles with Supabase backend, Stripe payments, and reusable React components.
-
-[![Vercel Deployment](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/gsempertegui/candle-shop)
 
 ## ✨ Features
 
 - **Product Catalog**: Dynamic listing with Supabase PostgreSQL
 - **Shopping Cart**: React Context API state management
-- **Reusable Components**: `FormWrapper`, `ProductCard` for scalable UI
+- **Reusable Components**: `ProductCard` for scalable UI
 - **Responsive Design**: Tailwind CSS mobile-first approach
-- **Payments Ready**: Stripe integration for secure checkout
+- **Payments Ready**: Stripe, PayPal, COD, Transferencia interbancaria, integration for secure checkout
 - **Authentication**: Supabase Auth for user accounts
 - **TypeScript**: Full type safety throughout
 - **SEO Optimized**: Next.js App Router with metadata
+- **Responsive**: Diseño adaptable (móvil, tablet, desktop).
+- **Código Límpio**: TypeScript sin errores, useCallback, escalable.
 
 ## 🛠️ Tech Stack
 
@@ -21,7 +22,12 @@ Next.js 14 e-commerce platform for aromatic candles with Supabase backend, Strip
 |----------|---------|-------|------------|
 | Next.js 14 | Supabase | Tailwind CSS | Vercel |
 | React 18 | PostgreSQL | TypeScript | GitHub Actions |
-| TypeScript | Stripe | ESLint | |
+| TypeScript | Stripe | Paypal | ESLint | |
+| Yarn (gestión de dependencias)
+
+## 📸 Captures
+![Home] (screenshots/home.png)
+![Checkout](screenshots/checkout.png)
 
 ## 🚀 Quick Start
 
@@ -31,14 +37,18 @@ git clone https://github.com/gsempertegui/candle-shop.git
 cd candle-shop
 
 # Install dependencies
-npm install
+yarn install --ignore-engines
 
 # Set up environment variables
-cp .env.example .env.local
+NEXT_PUBLIC_SUPABASE_URL=https://puqhxmfzuuvzngytfsui.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...your_SUPABASE_KEY
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_PAYPAL_CLIENT_ID=AQu98oT6...
 # Edit .env.local with your Supabase/Stripe keys
 
 # Run development server
-npm run dev
+yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the app.
@@ -47,14 +57,21 @@ Open [http://localhost:3000](http://localhost:3000) to view the app.
 
 ```
 candle-shop/
-├── lib/
-│   ├── reusables/     # Reusable components (FormWrapper, ProductCard)
-│   └── supabase/      # Supabase client & database utilities
 ├── src/
 │   ├── app/           # Next.js App Router (pages, layouts)
+|   ├── api/           # Interface with external apps
+|   |   └── checkout   # Generate pay orders
+|   ├── cart           # Shopping cart
+|   ├── checkout       # Payment proceedings
+|   ├── lib/
+|   │   ├── supabase.ts      # Supabase client & database utilities
+|   │   └── payments.ts    # Payments definitions
+|   ├── products       # List of products
+|   ├── success        # Successful payment process 
 │   ├── components/    # Page-specific React components
 │   └── contexts/      # React Context providers (CartContext)
 ├── public/            # Static assets (images, icons)
+│   └── images/        # Product images
 ├── .gitignore         # Excludes node_modules, .next, etc.
 └── README.md          # You're reading it!
 ```
@@ -109,7 +126,10 @@ STRIPE_SECRET_KEY=sk_test_...
 
 ## 📞 Contact
 
-**George Sempertegui**  
+**Desarrollado por George Sempertegui** | 2025
+
+## 💪Powered by Grok
+
 [gsempertegui@gmail.com](mailto:gsempertegui@gmail.com)  
 [LinkedIn](https://linkedin.com/in/gsempertegui) | [GitHub](https://github.com/gsempertegui)
 
@@ -118,3 +138,4 @@ Hire me for your next React/Next.js project! 🚀
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
+
