@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
 import { paymentOptions, processPayment, PaymentResult } from '@/lib/payments'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Checkout() {
   const { cart, getTotal } = useCart()
@@ -57,10 +58,12 @@ export default function Checkout() {
     }
   }
 
-  if (cart.length === 0) {
-    router.push('/cart')
-    return null
-  }
+  useEffect(() => {
+    if (cart.length === 0) {
+      router.push('/cart')
+      return
+    }
+  }, [cart, router])
 
   return (
     <main className="min-h-screen bg-gray-50 py-12">
@@ -107,7 +110,12 @@ export default function Checkout() {
                   className="mr-3 w-4 h-4 text-amber-600"
                 />
                 <div className="flex items-center space-x-3 flex-1">
-                  <img src={option.icon} alt={option.name} className="w-8 h-8 rounded" />
+                  <Image 
+                    src={option.icon} 
+                    alt={option.name} 
+                    width={64} height={64} 
+                    style={{ objectFit: 'contain' }}
+                    className="rounded" />
                   <div>
                     <div className="font-medium text-gray-800">{option.name}</div>
                     <div className="text-sm text-gray-500">{option.description}</div>

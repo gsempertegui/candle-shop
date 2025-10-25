@@ -16,28 +16,28 @@ export const paymentOptions: PaymentOption[] = [
     name: "💳 Tarjeta de Crédito",
     description: "Visa, MasterCard, American Express",
     fee: 2.9,
-    icon: "https://stripe.com/favicon.ico"
+    icon: "/images/icons/stripe.ico"
   },
   {
     id: "paypal",
     name: "🐧 PayPal",
     description: "Paga con tu cuenta PayPal",
     fee: 3.49,
-    icon: "https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP-logo-hc-v4.svg"
+    icon: "/images/icons/paypal-svgrepo-com.svg"
   },
   {
     id: "cod",
     name: "📦 Contra Entrega",
     description: "Paga en efectivo al recibir",
     fee: 0,
-    icon: "https://via.placeholder.com/32x32/4F46E5/FFFFFF?text=COD"
+    icon: "/images/icons/cash-on-delivery-svgrepo-com.svg"
   },
   {
     id: "transfer",
     name: "🏦 Transferencia",
-    description: "Bancolombia, Nequi, Daviplata",
+    description: "Banco de Guayaquil, Banco del Pichincha, Banco del Pacífico",
     fee: 0,
-    icon: "https://via.placeholder.com/32x32/059669/FFFFFF?text=BANK"
+    icon: "/images/icons/bank-transfer-svgrepo-com.svg"
   }
 ]
 
