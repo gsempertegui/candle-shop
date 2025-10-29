@@ -39,7 +39,7 @@ export async function getCandles(): Promise<Candle[]> {
 
 // Get popular products
 export async function fetchPopularCandles(limit: number = 4): Promise<Candle[]> {
-  let query = supabase
+  const query = supabase
     .from('candles')
     .select('*')
     .limit(limit)

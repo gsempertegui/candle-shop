@@ -1,6 +1,12 @@
-import { loadStripe } from '@stripe/stripe-js'
+//import { loadStripe } from '@stripe/stripe-js'
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+//const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+import { Candle } from '@/lib/supabase'
+
+interface CartItem extends Candle {
+  product: Candle
+  quantity: number
+}
 
 export interface PaymentOption {
   id: string
@@ -47,7 +53,7 @@ export interface PaymentResult {
   url?: string // Para Stripe
 }
 
-export async function processPayment(method: string, amount: number, items: any[]): Promise<PaymentResult> {
+export async function processPayment(method: string, amount: number, items: CartItem[]): Promise<PaymentResult> {
   switch (method) {
     case "stripe":
       return await processStripe(amount, items)
@@ -62,7 +68,7 @@ export async function processPayment(method: string, amount: number, items: any[
   }
 }
 
-async function processStripe(amount: number, items: any[]): Promise<PaymentResult> {
+async function processStripe(amount: number, items: CartItem[]): Promise<PaymentResult> {
   const response = await fetch('/api/create-checkout-session', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

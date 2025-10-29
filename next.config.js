@@ -28,6 +28,12 @@ const nextConfig = {
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'stripe.com', // Stripe
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   // Opcional: Habilita App Router experimental (si no está por defecto)

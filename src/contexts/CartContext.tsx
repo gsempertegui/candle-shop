@@ -1,8 +1,7 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useCallback, useMemo, useState, ReactNode } from 'react'
 import { Candle } from '@/lib/supabase'
-import { create } from 'domain'
 
 interface CartItem extends Candle {
   product: Candle
@@ -24,7 +23,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined)
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
 
-  const addToCart = (product: Candle) => {
+  const addToCart = useCallback((product: Candle) => {
     setCart((prev): CartItem[] => {
       const existing = prev.find(item => item.product.id === product.id)
       if (existing) {
@@ -36,17 +35,21 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, {product, quantity: 1 }] as CartItem[]
     })
-  }
+  },[])
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = useCallback((id: string) => {
     setCart(prev => prev.filter(item => item.product.id !== id))
-  }
+  },[])
 
-  const clearCart = () => {
-    setCart([])
-  }
+//  const clearCart = () => {
+//    setCart([])
+//  }
 
-  const updateQuantity = (id: string, quantity: number): void => {
+  const clearCart = useCallback(() => {
+    setCart([]);
+  }, []); // El array de dependencias está vacío porque no depende de ninguna variable externa
+
+  const updateQuantity = useCallback((id: string, quantity: number): void => {
     if (quantity <= 0) {
       removeFromCart(id)
       return
@@ -56,28 +59,29 @@ export function CartProvider({ children }: { children: ReactNode }) {
         item.product.id === id ? { ...item, quantity } : item
       )
     )
-  }
+  },[removeFromCart])
 
   //const clearCart = () => dispatch({ type: 'CLEAR_CART' })
 
-  const getTotal = (): number => {
+  const getTotal = useCallback((): number => {
     return parseFloat(
       cart
         .reduce((sum: number, item: CartItem) => 
           sum + (item.product.price * item.quantity), 0)
         .toFixed(2)
     )
-  }
+  },[cart])
 
-  let cartCount = parseFloat(cart
+  const cartCount = parseFloat(cart
           .reduce((sum, item) => 
             sum + (item.product.price * item.quantity), 0)
           .toFixed(2))
 
   console.log('CartContext => typeof(cartCount)=', typeof(cartCount))
-  
-  return (
-    <CartContext.Provider value={{
+
+  // 1. Usa useMemo para memoizar el valor del contexto
+  const contextValue = useMemo(
+    () => ({
       cart,
       addToCart,
       removeFromCart,
@@ -85,7 +89,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       getTotal,
       cartCount,
       clearCart
-    }}>
+    }),
+    [cart, addToCart, removeFromCart, updateQuantity, getTotal, cartCount, clearCart],
+  )
+
+  return (
+    <CartContext.Provider value={contextValue}>
       {children}
     </CartContext.Provider>
   )

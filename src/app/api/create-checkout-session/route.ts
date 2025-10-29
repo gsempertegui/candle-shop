@@ -1,13 +1,20 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
+interface Item {
+  name: string;
+  image_url: string;
+  price: number;
+  quantity: number;
+}
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!)
 
 export async function POST(request: Request) {
   try {
     const { items } = await request.json()
 
-    const lineItems = items.map((item: any) => ({
+    const lineItems = items.map((item: Item) => ({
       price_data: {
         currency: 'usd',
         product_data: {
@@ -28,6 +35,13 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ url: session.url })
   } catch (error) {
-    return NextResponse.json({ error: 'Error creando sesión' }, { status: 500 })
+    if (error instanceof Error) {
+      console.error(error.message); // Acceso seguro a .message
+      return NextResponse.json({ error: 'Error creando sesión: ' + error.message }, { status: 500 })
+    } else {
+      // Maneja el caso en el que el error no sea una instancia de Error
+      console.error('Ocurrió un error desconocido', error);
+      return NextResponse.json({ error: 'Error creando sesión' }, { status: 500 });
+    }      
   }
 }

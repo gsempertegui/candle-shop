@@ -11,9 +11,9 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart()
 
-  const handleAddToCart = () => {
-    addToCart(product)
-  }
+  //const handleAddToCart = () => {
+  //  addToCart(product)
+  //}
 
   //console.log('ProductCard: product.id=',product.id)
 

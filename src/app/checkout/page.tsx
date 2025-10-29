@@ -4,6 +4,12 @@ import { useCart } from '@/contexts/CartContext'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { PayPalScriptProvider, PayPalButtons } from '@paypal/react-paypal-js'
+import {
+  CreateOrderData,
+  CreateOrderActions,
+  OnApproveData,
+  OnApproveActions,
+} from '@paypal/paypal-js'
 import { paymentOptions, processPayment, PaymentResult } from '@/lib/payments'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -15,24 +21,43 @@ export default function Checkout() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [status, setStatus] = useState('')
   const total = getTotal()
+  const totalStr = total.toFixed(2)
 
   // PayPal handlers
-  const createPayPalOrder = (data: any, actions: any) => {
+  const createPayPalOrder = (data: CreateOrderData, actions: CreateOrderActions) => {
     return actions.order.create({
+      intent: 'CAPTURE',
       purchase_units: [{
-        amount: { value: total.toFixed(2) }
+        amount: { 
+          currency_code: 'USD',
+          value: totalStr,
+        },
       }]
     })
   }
 
-  const onPayPalApprove = async (data: any, actions: any) => {
+  const onPayPalApprove = async (data: OnApproveData, actions: OnApproveActions) => {
     setIsProcessing(true)
     try {
-      const details = await actions.order.capture()
-      setStatus('✅ ¡Pago PayPal exitoso!')
-      setTimeout(() => router.push('/success'), 1500)
+      if (actions.order) {
+        const details = await actions.order.capture()
+        //console.log('Pago exitoso:', details)
+        setStatus(`✅ ¡Pago exitoso! ID de transacción: ${details.id}`)
+        setTimeout(() => router.push('/success'), 1500)
+      } else {
+        // Maneja el caso en que actions.order no está definido
+        console.error('El objeto actions.order no está disponible.')
+        setStatus('❌ Error: El proceso de pago no pudo completarse.')
+      }
     } catch (error) {
-      setStatus('❌ Error en PayPal')
+      if (error instanceof Error) {
+        console.error(error.message); // Acceso seguro a .message
+        setStatus('❌ Error en PayPal: ' + error.message)
+      } else {
+        // Maneja el caso en el que el error no sea una instancia de Error
+        console.error('Ocurrió un error desconocido', error);
+        setStatus('❌ Error desconocido en PayPal: ' + error)
+      }      
     } finally {
       setIsProcessing(false)
     }
@@ -52,7 +77,14 @@ export default function Checkout() {
         setTimeout(() => router.push('/success'), 1500)
       }
     } catch (error) {
-      setStatus('❌ Error en el pago')
+      if (error instanceof Error) {
+        console.error(error.message); // Acceso seguro a .message
+        setStatus('❌ Error en el pago: ' + error.message)
+      } else {
+        // Maneja el caso en el que el error no sea una instancia de Error
+        console.error('Ocurrió un error desconocido', error);
+        setStatus('❌ Error desconocido en el pago: ' + error)
+      }      
     } finally {
       setIsProcessing(false)
     }
@@ -114,7 +146,7 @@ export default function Checkout() {
                     src={option.icon} 
                     alt={option.name} 
                     width={64} height={64} 
-                    style={{ objectFit: 'contain' }}
+                    style={{ objectFit: 'contain'}}
                     className="rounded" />
                   <div>
                     <div className="font-medium text-gray-800">{option.name}</div>

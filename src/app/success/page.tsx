@@ -9,8 +9,8 @@ export default function Success() {
 
   // Ejecutar clearCart SOLO al montar
   useEffect(() => {
-    clearCart() // ✅ UNA SOLA VEZ
-  }, []) // ✅ CORCHETES VACÍOS = 1 EJECUCIÓN
+    clearCart() // ✅ UNA SOLA VEZ al estar memoizado en CartContext.tsx
+  }, [clearCart]) // 
 
   return (
     <main className="min-h-screen bg-gray-50 py-12">
