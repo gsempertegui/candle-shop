@@ -23,6 +23,7 @@ Next.js 14 e-commerce platform for aromatic candles with Supabase backend, Strip
 | React 18    | PostgreSQL    | TypeScript   | GitHub Actions |
 | TypeScript  | Stripe/Paypal | ESLint       |                |
 | Yarn (gestión de dependencias)
+| Vercel - GitHub integration (CI/CD)
 
 ## 📸 Captures
 ![Home] (screenshots/home.png)
