@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
