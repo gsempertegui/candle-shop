@@ -1,5 +1,7 @@
 'use client'
 
+//import dynamic from 'next/dynamic'
+
 import { useCart } from '@/contexts/CartContext'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'

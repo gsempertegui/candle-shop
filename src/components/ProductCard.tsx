@@ -24,10 +24,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           <Image
             src={product.image_url}
             alt={product.name}
-            width={400}
-            height={400}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={false} // Lazy load para mejor performance
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300"
           />
         </div>
         <div>
