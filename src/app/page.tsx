@@ -1,6 +1,14 @@
 import Link from 'next/link'
 import { fetchPopularCandles, Candle } from '@/lib/supabase'
 import ProductCard from '@/components/ProductCard'
+import type { Metadata } from 'next'
+
+
+export const metadata: Metadata = {
+  title: 'George\'s Candle Shop - Velas Aromáticas Premium',
+  description: 'E-commerce de velas aromáticas hechas con amor y esencias naturales',
+}
+
 
 export default async function Home() {
   let candles: Candle[] = []
