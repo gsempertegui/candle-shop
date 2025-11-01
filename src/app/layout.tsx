@@ -35,6 +35,12 @@ export default function RootLayout({
     }
   }, [pathname])
 
+  useEffect(() => {
+    if (window.location.pathname.includes('/checkout')) {
+      import('@paypal/react-paypal-js')
+    }
+  }, [])
+
   return (
     <html lang="es">
       <head>
