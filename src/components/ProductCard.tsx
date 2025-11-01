@@ -5,26 +5,28 @@ import { Candle } from '../lib/supabase'
 import { useCart } from '@/contexts/CartContext'
 
 interface ProductCardProps {
-  product: Candle
+  product: Candle,
+  isPriority?: boolean
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard( { product, isPriority = false }: ProductCardProps ) {
   const { addToCart } = useCart()
 
   //const handleAddToCart = () => {
   //  addToCart(product)
   //}
 
-  //console.log('ProductCard: product.id=',product.id)
+  console.log('ProductCard: isPriority=', isPriority)
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 max-w-sm mx-auto">
-      <div className="relative aspect-square">
-        <div>
+      <div>
+        <div className="relative aspect-square">
           <Image
             src={product.image_url}
             alt={product.name}
             fill
+            priority={ isPriority }
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300"
           />

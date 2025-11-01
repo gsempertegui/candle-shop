@@ -24,7 +24,7 @@ export default function Products() {
     if (isLoading || !hasMore) 
       return
     setIsLoading(true)
-    console.log('fetchCandles - page:', pageRef.current)
+    //console.log('fetchCandles - page:', pageRef.current)
   
     try {
       // Check if there is more products, get total of products once
@@ -145,7 +145,10 @@ export default function Products() {
         </h1>
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
           {candles.map((candle) => (
-            <ProductCard key={candle.id} product={candle}/>
+            <ProductCard 
+              key={candle.id} 
+              product={candle}
+            />
           ))}
         
         {/* MAS ESPACIO ANTES DEL OBSERVER... */}

@@ -4,6 +4,7 @@ import ProductCard from '@/components/ProductCard'
 
 export default async function Home() {
   let candles: Candle[] = []
+  const isPriority = true
   
   try {
     candles = await fetchPopularCandles()
@@ -44,7 +45,7 @@ export default async function Home() {
             <h1 className="text-3xl font-bold text-center mb-12">Productos Destacados</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
               {candles.slice(0, 8).map((candle) => (
-                <ProductCard key={candle.id} product={candle} />
+                <ProductCard key={candle.id} product={candle} isPriority={isPriority} />
               ))}
             </div>
             {candles.length === 0 && (
